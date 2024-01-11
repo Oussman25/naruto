@@ -33,6 +33,9 @@ nav{
     align-items: center;
     flex-direction: column;
 }
+.formSelectTeam button{
+    border: none;
+}
 
 .teamName{
     text-align: center;
@@ -55,6 +58,10 @@ select{
     }
     .teamName{
         font-size: 1.8em;
+    }
+    .formSelectTeam button{
+        width: 100px;
+        height: 40px;
     }
     #selectTeam{
         width: 400px;
