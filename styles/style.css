@@ -1,0 +1,98 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+@font-face {
+    font-family: 'fontNaruto';
+    src: url(../fonts/njnaruto.ttf);
+}
+
+@font-face {
+    font-family: 'fontNaruto';
+    src: url(../fonts/njnaruto.eot);
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: 'fontNaruto';
+}
+nav{
+    background: #F36A3E;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainPage{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.teamName{
+    text-align: center;
+}
+
+.character{
+    display: flex;
+}
+
+select{
+    border: none;
+    background: #D9D9D9;
+    text-align: center;
+    font-size: 16px;
+}
+
+@media screen and (min-width:1001px)  { 
+    nav{
+        font-size: 2em;
+    }
+    .teamName{
+        font-size: 1.8em;
+    }
+    #selectTeam{
+        width: 400px;
+        height: 40px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .sasukeBG, .narutoBG{
+        position: absolute;
+    }
+    .narutoBG{
+        height: 400px;
+        right: 0;
+        bottom: 0;
+    }
+    .sasukeBG{
+        height: 400px;
+        left: 0;
+        bottom: 0;
+    }
+
+    .teamCharacters{
+        margin-top: 20px;
+        display: flex;
+        gap: 5vh;
+    }
+
+    .character{
+        width: 20vw;
+        height: 20vw;
+        background: #D9D9D9;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .character img{
+        height: 12.5vw;
+        margin-bottom: 2.5vh;
+    }
+}
