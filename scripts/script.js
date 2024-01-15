@@ -4,6 +4,10 @@ const teamCharacters = document.querySelector('.teamCharacters')
 const formSelectTeam = document.querySelector('.formSelectTeam')
 const submitButton = document.querySelector('#submitButton');
 const teamName = document.querySelector('.teamName')
+const btnMainPage = document.querySelector('.btnMainPage')
+const btnExtra = document.querySelector('.btnExtra')
+const mainPage = document.querySelector('.mainPage')
+const Extra = document.querySelector('.Extra')
 let charactersCards = ""
 
 for (let i = 1; i < 191; i++) {
@@ -34,6 +38,24 @@ submitButton.addEventListener('click', () => {
     }
 }
 ) 
+
+btnExtra.addEventListener('click', () => {
+    Extra.style.display= 'flex'
+    mainPage.style.display= 'none'
+    btnExtra.style.display= 'none'
+    btnMainPage.style.display= 'block'
+}
+)
+
+btnMainPage.addEventListener('click', () => {
+    Extra.style.display= 'none'
+    mainPage.style.display= 'flex'
+    btnExtra.style.display= 'block'
+    btnMainPage.style.display= 'none'
+}
+)
+
+
 
 
 
