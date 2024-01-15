@@ -3,6 +3,7 @@ const selectTeam = document.querySelector('#selectTeam')
 const teamCharacters = document.querySelector('.teamCharacters')
 const formSelectTeam = document.querySelector('.formSelectTeam')
 const submitButton = document.querySelector('#submitButton');
+const teamName = document.querySelector('.teamName')
 let charactersCards = ""
 
 for (let i = 1; i < 191; i++) {
@@ -21,9 +22,10 @@ submitButton.addEventListener('click', () => {
             fetch('https://narutodb.xyz/api/team/'+selectTeam.value)
         .then(response => response.json())
         .then(data => {
+            teamName.innerHTML = data.name
             charactersCards = ""
             for (let i = 0; i < data.characters.length; i++) {
-                charactersCards += '<div class="character"><img src="'+data.characters[i].images[0]+'" alt=""><p>'+data.characters[i].name+'</p></div>'   
+                charactersCards += '<div class="character"><img src="'+data.characters[i].images[0]+'" alt=""><p>'+data.characters[i].name+'</p></div><img class="kunai" src="img-naruto/kunai.png" alt="">'   
                 console.log(data.characters[i].images);            
             }
         console.log(charactersCards);
