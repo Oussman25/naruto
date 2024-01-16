@@ -10,16 +10,14 @@ const mainPage = document.querySelector('.mainPage')
 const Extra = document.querySelector('.Extra')
 let charactersCards = ""
 
-for (let i = 1; i < 191; i++) {
-    fetch('https://narutodb.xyz/api/team/'+i)
-    .then(response => response.json())
-    .then(data => {
-        // console.log(data);
-        // console.log(data.name);
-        selectTeam.innerHTML += '<option value="'+data.id+'">'+data.name+'</option>'
+fetch('https://narutodb.xyz/api/team?page=1&limit=191')
+.then(response => response.json())
+.then(data => {
+    data.teams.forEach(team => {
+        selectTeam.innerHTML += '<option value="'+team.id+'">'+team.name+'</option>'
+    }); 
+}) 
 
-    }) 
-}
 
 submitButton.addEventListener('click', () => {
     if (selectTeam.value != 0) {
