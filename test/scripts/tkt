@@ -1,0 +1,118 @@
+
+                characterSelected.personal.clan.forEach(comparateClan => {
+                    if (character.personal && character.personal.clan == comparateClan) {
+                        if (!characterLink[character.name]) {
+                            characterLink[character.name] = 3; // Si la clé n'existe pas encore, initialiser à 3
+                        } else {
+                            characterLink[character.name] += 3; // Si la clé existe, ajouter 3 points
+                        }
+                    }
+                });
+
+                characterSelected.personal.team.forEach(comparateTeam => {
+                    for (let i = 0; i < character.personal.team.length; i++) {
+                        if (character.personal && character.personal.team[i] == comparateTeam) {
+                            if (!characterLink[character.name]) {
+                                characterLink[character.name] = 3; // Si la clé n'existe pas encore, initialiser à 3
+                            } else {
+                                characterLink[character.name] += 3; // Si la clé existe, ajouter 3 points
+                            }
+                        }     
+                    }
+                });
+
+                if (typeof myObject === 'object' && myObject !== null && !Array.isArray(myObject)) {
+                    characterSelected.personal.clan.forEach(comparateClan => {
+                        if (character.personal && character.personal.clan == comparateClan) {
+                            if (!characterLink[character.name]) {
+                                characterLink[character.name] = 3; // Si la clé n'existe pas encore, initialiser à 3
+                            } else {
+                                characterLink[character.name] += 3; // Si la clé existe, ajouter 3 points
+                            }
+                        }
+                    }); 
+                    
+                    console.log("C'est un objet !");
+                } else {
+
+                    if (character.personal && character.personal.clan == characterSelected.personal.clan) {
+                        if (!characterLink[character.name]) {
+                            characterLink[character.name] = 3;
+                        } else {
+                            characterLink[character.name] += 3;
+                        }
+                    }
+                }
+
+// let perso = prompt()
+const formSelectCharacter = document.querySelector('.formSelectCharacter')
+const selectCharacter = document.querySelector('#selectCharacter')
+const submitButton = document.querySelector('#submitButton')
+
+fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
+    .then(response => response.json())
+    .then(data => {
+        data.characters.forEach(character => {
+            selectCharacter.innerHTML += '<option value="'+character.id+'">'+character.name+'</option>';
+        });         
+        submitButton.addEventListener('click', () => {
+            let characterSelected = data.characters[selectCharacter.value]
+            console.log(characterSelected);
+            let characterLinks = [];
+            data.characters.forEach(character => {
+                for (const cle in character.family) {
+                    // Vérifier si la clé est propre à l'objet (et non héritée)
+                    if (character.family.hasOwnProperty(cle)) {
+                        
+                        if (character.family[cle] == characterSelected.name) {
+                            console.log(character);  
+                            characterLinks[character.name] = 3
+                        }                                 
+                    }
+                }
+
+                if (typeof myObject === 'object' && myObject !== null && !Array.isArray(myObject)) {
+                    characterSelected.personal.clan.forEach(comparateClan => {
+                        if (character.personal && character.personal.clan == comparateClan) {
+                            if (!characterLinks[character.name]) {
+                                characterLinks[character.name] = 3; // Si la clé n'existe pas encore, initialiser à 3
+                            } else {
+                                characterLinks[character.name] += 3; // Si la clé existe, ajouter 3 points
+                            }
+                        }
+                    }); 
+                    
+                    console.log("C'est un objet !");
+                } else {
+
+                    if (character.personal && character.personal.clan == characterSelected.personal.clan) {
+                        if (!characterLinks[character.name]) {
+                            characterLinks[character.name] = 3;
+                        } else {
+                            characterLinks[character.name] += 3;
+                        }
+                    }
+                }        
+            }); 
+            
+            console.log(characterSelected.personal.team);
+
+            characterSelected.personal.team.forEach(element => {
+                fetch('https://narutodb.xyz/api/team/search?name='+element)
+                    .then(response => response.json())
+                    .then(data => {  
+                data.characters.forEach(character => {
+                    if (!characterLinks[character.name]) {
+                        characterLinks[character.name] = 3; // Si la clé n'existe pas encore, initialiser à 3
+                    } else {
+                        characterLinks[character.name] += 3; // Si la clé existe, ajouter 3 points
+                    }                
+                });                
+            }); 
+        }); 
+            console.log(characterLinks); 
+            for (const characterLink of characterLinks) {
+                console.log(characterLink);
+            }            
+    });
+});
