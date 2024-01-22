@@ -2,7 +2,7 @@ const body = document.body
 const selectTeam = document.querySelector('#selectTeam')
 const teamCharacters = document.querySelector('.teamCharacters')
 const formSelectTeam = document.querySelector('.formSelectTeam')
-const submitButton = document.querySelector('#submitButton');
+const submitButtonTeam = document.querySelector('#submitButtonTeam');
 const teamName = document.querySelector('.teamName')
 const btnMainPage = document.querySelector('.btnMainPage')
 const btnExtra = document.querySelector('.btnExtra')
@@ -19,7 +19,7 @@ fetch('https://narutodb.xyz/api/team?page=1&limit=191')
 }) 
 
 
-submitButton.addEventListener('click', () => {
+submitButtonTeam.addEventListener('click', () => {
     if (selectTeam.value != 0) {
             fetch('https://narutodb.xyz/api/team/'+selectTeam.value)
         .then(response => response.json())

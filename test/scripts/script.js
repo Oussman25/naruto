@@ -1,6 +1,6 @@
 const formSelectCharacter = document.querySelector('.formSelectCharacter');
 const selectCharacter = document.querySelector('#selectCharacter');
-const submitButton = document.querySelector('#submitButton');
+const submitButtonCharacter = document.querySelector('#submitButtonCharacter');
 const divLinksCharacters = document.querySelector('.divLinksCharacters')
 
 fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
@@ -23,7 +23,9 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
                 // Vérifier les relations familiales
                 for (const cle in character.family) {
                     if (character.family.hasOwnProperty(cle) && character.family[cle] == characterSelected.name) {
-                        characterLinks[character.name] = (characterLinks[character.name] || 0) + 1;
+                        characterLinks[character.name] = characterLinks[character.name] || {};
+                        characterLinks[character.name].link = (characterLinks[character.name].link || 0) + 1;
+                        characterLinks[character.name].id = character.id
                     }
                 }
 
@@ -33,12 +35,16 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
                         // Si c'est un tableau (peut avoir plusieurs clans)
                         character.personal.clan.forEach(comparateClan => {
                             if (comparateClan == characterSelected.personal.clan) {
-                                characterLinks[character.name] = (characterLinks[character.name] || 0) + 1;
+                                characterLinks[character.name] = characterLinks[character.name] || {};
+                                characterLinks[character.name].link = (characterLinks[character.name].link || 0) + 1;
+                                characterLinks[character.name].id = character.id
                             }
                         });
                     } else if (character.personal.clan == characterSelected.personal.clan) {
-                        // S'il n'y a qu'un seul clan
-                        characterLinks[character.name] = (characterLinks[character.name] || 0) + 1;
+                        // S'il n'y a qu'un seul 
+                        characterLinks[character.name] = characterLinks[character.name] || {};
+                        characterLinks[character.name].link = (characterLinks[character.name].link || 0) + 1;
+                        characterLinks[character.name].id = character.id
                     }
                 }
             }
@@ -49,27 +55,31 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
                 const data = await response.json();
             
                 data.characters.forEach((character) => {
-                    characterLinks[character.name] = (characterLinks[character.name] || 0) + 1;
+                    characterLinks[character.name] = characterLinks[character.name] || {};
+                    characterLinks[character.name].link = (characterLinks[character.name].link || 0) + 1;
+                    characterLinks[character.name].id = character.id
                 });
 
             // Triez le tableau par ordre décroissant
             const characterEntries = Object.entries(characterLinks);
-            characterEntries.sort((a, b) => b[1] - a[1]);
+            characterEntries.sort((a, b) => b[1].link - a[1].link);
             characterLinks = Object.fromEntries(characterEntries);    
                 
             }));
 
             
             console.log(characterLinks);
+            divLinksCharacters.innerHTML=""
 
             // Afficher les liens entre personnages
             for (const characterLink in characterLinks) {
+                
                 console.log(`${characterLink} : ${characterLinks[characterLink]}`);
 
                 const divCharacter = document.createElement('div');
                 divCharacter.id = `${characterLink}`;
                 // divCharacter.textContent = characterLink;
-                let divHeigh = (characterLinks[characterLink]*2.5)+5;
+                let divHeigh = (characterLinks[characterLink].link*2.5)+5;
                 divCharacter.style.height = divHeigh + "vh";
 
                 divLinksCharacters.appendChild(divCharacter);
@@ -79,15 +89,14 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
 
                 divCharacter.appendChild(nameCharacter);
 
-                console.log(data.characters.name[characterLink]);
-                // const imgCharacter = document.createElement('img')
-                // imgCharacter.src = data.characters.name[characterLink].images[0]
+                const imgCharacter = document.createElement('img')
+                imgCharacter.src = data.characters[characterLinks[characterLink].id].images[0]
 
-                // divCharacter.appendChild(imgCharacter)
+                divCharacter.appendChild(imgCharacter)
             }
         }
 
-        submitButton.addEventListener('click', async () => {
+        submitButtonCharacter.addEventListener('click', async () => {
             linker(data.characters[selectCharacter.value]);          
         });
     });
