@@ -1,6 +1,7 @@
 const formSelectCharacter = document.querySelector('.formSelectCharacter');
 const selectCharacter = document.querySelector('#selectCharacter');
 const submitButton = document.querySelector('#submitButton');
+const divLinksCharacters = document.querySelector('.divLinksCharacters')
 
 fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
     .then(response => response.json())
@@ -10,9 +11,9 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
             selectCharacter.innerHTML += '<option value="' + character.id + '">' + character.name + '</option>';
         });
 
-        submitButton.addEventListener('click', async () => {
+        async function linker (params) {
             // Obtenir le personnage sélectionné
-            let characterSelected = data.characters.find(character => character.id == selectCharacter.value);
+            let characterSelected = params;
 
             // Initialiser le tableau des liens entre personnages
             let characterLinks = {};
@@ -22,7 +23,7 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
                 // Vérifier les relations familiales
                 for (const cle in character.family) {
                     if (character.family.hasOwnProperty(cle) && character.family[cle] == characterSelected.name) {
-                        characterLinks[character.name] = (characterLinks[character.name] || 0) + 3;
+                        characterLinks[character.name] = (characterLinks[character.name] || 0) + 1;
                     }
                 }
 
@@ -32,35 +33,61 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
                         // Si c'est un tableau (peut avoir plusieurs clans)
                         character.personal.clan.forEach(comparateClan => {
                             if (comparateClan == characterSelected.personal.clan) {
-                                characterLinks[character.name] = (characterLinks[character.name] || 0) + 3;
+                                characterLinks[character.name] = (characterLinks[character.name] || 0) + 1;
                             }
                         });
                     } else if (character.personal.clan == characterSelected.personal.clan) {
                         // S'il n'y a qu'un seul clan
-                        characterLinks[character.name] = (characterLinks[character.name] || 0) + 3;
+                        characterLinks[character.name] = (characterLinks[character.name] || 0) + 1;
                     }
                 }
-
-                // Vérifier l'équipe
-                characterSelected.personal.team.forEach(element => {
-                    fetch('https://narutodb.xyz/api/team/search?name=' + element)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.characters.forEach(character => {
-                                if (!characterLinks[character.name]) {
-                                    characterLinks[character.name] = 3; // Si la clé n'existe pas encore, initialiser à 3
-                                } else {
-                                    characterLinks[character.name] += 3; // Si la clé existe, ajouter 3 points
-                                }
-                            });
-                        });
-                });
             }
+
+            // Vérifier l'équipe
+            await Promise.all(characterSelected.personal.team.map(async (element) => {
+                const response = await fetch('https://narutodb.xyz/api/team/search?name=' + element);
+                const data = await response.json();
+            
+                data.characters.forEach((character) => {
+                    characterLinks[character.name] = (characterLinks[character.name] || 0) + 1;
+                });
+
+            // Triez le tableau par ordre décroissant
+            const characterEntries = Object.entries(characterLinks);
+            characterEntries.sort((a, b) => b[1] - a[1]);
+            characterLinks = Object.fromEntries(characterEntries);    
+                
+            }));
+
+            
             console.log(characterLinks);
 
             // Afficher les liens entre personnages
             for (const characterLink in characterLinks) {
                 console.log(`${characterLink} : ${characterLinks[characterLink]}`);
+
+                const divCharacter = document.createElement('div');
+                divCharacter.id = `${characterLink}`;
+                // divCharacter.textContent = characterLink;
+                let divHeigh = (characterLinks[characterLink]*2.5)+5;
+                divCharacter.style.height = divHeigh + "vh";
+
+                divLinksCharacters.appendChild(divCharacter);
+
+                const nameCharacter = document.createElement('p');
+                nameCharacter.textContent = characterLink;
+
+                divCharacter.appendChild(nameCharacter);
+
+                console.log(data.characters.name[characterLink]);
+                // const imgCharacter = document.createElement('img')
+                // imgCharacter.src = data.characters.name[characterLink].images[0]
+
+                // divCharacter.appendChild(imgCharacter)
             }
+        }
+
+        submitButton.addEventListener('click', async () => {
+            linker(data.characters[selectCharacter.value]);          
         });
     });
