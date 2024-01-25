@@ -67,9 +67,9 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
                 
             }));
 
-            
+            delete characterLinks[characterSelected.name];
             console.log(characterLinks);
-            divLinksCharacters.innerHTML=""
+            divLinksCharacters.innerHTML="";
 
             // Afficher les liens entre personnages
             for (const characterLink in characterLinks) {
@@ -77,8 +77,7 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
                 console.log(`${characterLink} : ${characterLinks[characterLink]}`);
 
                 const divCharacter = document.createElement('div');
-                divCharacter.id = `${characterLink}`;
-                // divCharacter.textContent = characterLink;
+                divCharacter.id = `characterLinked`;
                 let divHeigh = (characterLinks[characterLink].link*2.5)+5;
                 divCharacter.style.height = divHeigh + "vh";
 
@@ -89,10 +88,14 @@ fetch('https://narutodb.xyz/api/character?page=1&limit=1431')
 
                 divCharacter.appendChild(nameCharacter);
 
-                const imgCharacter = document.createElement('img')
-                imgCharacter.src = data.characters[characterLinks[characterLink].id].images[0]
+                const divimgCharacter = document.createElement('div');
+                divimgCharacter.id = `imgcharacterLinked`;
+                divimgCharacter.style.backgroundImage = `url(${data.characters[characterLinks[characterLink].id].images[0]})`; 
+                let divWidth = divHeigh;
+                divimgCharacter.style.width = divWidth + "vh";  
+                divimgCharacter.style.height = divHeigh + "vh";                                                                                                                             
 
-                divCharacter.appendChild(imgCharacter)
+                divCharacter.appendChild(divimgCharacter)
             }
         }
 
