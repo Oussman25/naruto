@@ -1,0 +1,288 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+@font-face {
+    font-family: 'fontNaruto';
+    src: url(/fonts/njnaruto.ttf);
+}
+
+@font-face {
+    font-family: 'fontNaruto';
+    src: url(/fonts/njnaruto.eot);
+}
+
+body{
+    cursor: url('/img-naruto/kunai.png'), auto;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'fontNaruto';
+}
+nav{
+    background: #F36A3E;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a.links , a.home {
+    text-decoration: none;
+    color: #F36A3E;
+    background-color: #D9D9D9;
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+a.links{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+a.home{
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+}
+
+a.links:hover{
+    background-color: #F36A3E;
+    color: #D9D9D9;
+}
+
+a.home:hover{
+    background-color: #F36A3E;
+    color: #D9D9D9;
+}
+
+.Page{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.formSelectTeam button{
+    border: none;
+}
+
+.teamName{
+    text-align: center;
+}
+
+.teamCharacters{
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.character{
+    display: flex;
+}
+
+select{
+    border: none;
+    background: #D9D9D9;
+    text-align: center;
+    font-size: 16px;
+}
+
+#submitButton{
+    font-family: 'fontNaruto' ;
+}
+
+.kunai {
+    display: none;
+}
+
+.Extra {
+    display: none;
+}
+
+.btnMainPage {
+    display: none;
+}
+@media screen and (min-width:1001px)  { 
+    nav{
+        font-size: 2em;
+    }
+    .teamName{
+        font-size: 1.8em;
+    }
+    .formSelectTeam button{
+        width: 100px;
+        height: 40px;
+    }
+    #selectTeam{
+        width: 400px;
+        height: 40px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .sasukeBG, .narutoBG{
+        position: absolute;
+        z-index: -1;
+        height: 400px;
+    }
+    .narutoBG{
+        right: 0;
+        bottom: 0;  
+    }
+    .sasukeBG{
+        left: 0;
+        bottom: 0;
+    }
+    .teamCharacters{
+        margin-top: 20px;
+        display: flex;
+        gap: 5vh;
+    }
+
+    .character{
+        width: 20vw;
+        height: 20vw;
+        background: #D9D9D9;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .character img{
+        height: 12.5vw;
+        margin-bottom: 2.5vh;
+    }
+}
+
+@media screen and (min-width:501px) and (max-width:1000px){
+    nav{
+        font-size: 2em;
+    }
+    .teamName{
+        font-size: 1.8em;
+    }
+    .formSelectTeam button{
+        width: 50px;
+        height: 40px;
+    }
+    #selectTeam{
+        width: 345px;
+        height: 40px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .sasukeBG, .narutoBG{
+        position: absolute;
+        z-index: -1;
+        height: 400px;
+        opacity: 50%;
+    }
+    .narutoBG{
+        right: 0;
+        bottom: 0;  
+    }
+    .sasukeBG{
+        left: 0;
+        bottom: 0;
+    }
+
+    .teamCharacters{
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5vh;
+    }
+
+    .character{
+        width: 20vw;
+        height: 25vw;
+        background: #D9D9D9;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5vh;
+        text-align: center;
+    }
+
+    .character img{
+        width: 17.5vw; 
+    }
+    /* .teamCharacters img:last-child{
+        display: none;
+    }    
+
+    .teamCharacters img:nth-child(3) {
+        display: none; 
+    }  */
+
+    /* .kunai {
+        width: auto;
+        height: 20vw;
+    } */
+}
+
+@media screen and (max-width:500px){
+    nav{
+        font-size: 1.5em;
+    }
+    .teamName{
+        font-size: 1.5em;
+    }
+    .formSelectTeam button{
+        width: 50px;
+        height: 20px;
+    }
+    #selectTeam{
+        width: 200px;
+        height: 20px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .sasukeBG, .narutoBG{
+        position: absolute;
+        z-index: -1;
+        height: 200px;
+        opacity: 50%;
+    }
+    .narutoBG{
+        right: 0;
+        bottom: 0;  
+    }
+    .sasukeBG{
+        left: 0;
+        bottom: 0;
+    }
+
+    .teamCharacters{
+        justify-content:center;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5vh;
+    }
+
+    .character{
+        width: 30vw;
+        height: 25vw;
+        background: #D9D9D9;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5vh;
+        text-align: center;
+        font-size: small;
+    }
+
+    .character img{
+        width: 17.5vw; 
+    }
+
+    .character p{
+        writing-mode: vertical-lr;
+    }
+}
