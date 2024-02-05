@@ -136,20 +136,6 @@ select{
         margin-bottom: 25px;
     }
 
-    .sasukeBG, .narutoBG{
-        position: absolute;
-        z-index: -1;
-        height: 400px;
-    }
-    .narutoBG{
-        right: 0;
-        bottom: 0;  
-    }
-    .sasukeBG{
-        left: 0;
-        bottom: 0;
-    }
-
 }
 
 @media screen and (min-width:501px) and (max-width:1000px){
@@ -202,20 +188,6 @@ select{
         height: 20px;
         margin-top: 25px;
         margin-bottom: 25px;
-    }
-    .sasukeBG, .narutoBG{
-        position: absolute;
-        z-index: -1;
-        height: 200px;
-        opacity: 50%;
-    }
-    .narutoBG{
-        right: 0;
-        bottom: 0;  
-    }
-    .sasukeBG{
-        left: 0;
-        bottom: 0;
     }
 
 }
