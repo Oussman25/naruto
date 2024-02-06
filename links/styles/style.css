@@ -1,15 +1,15 @@
 @font-face {
     font-family: 'fontNaruto';
-    src: url(/fonts/njnaruto.ttf);
+    src: url(https://oussman25.github.io/naruto/fonts/njnaruto.ttf);
 }
 
 @font-face {
     font-family: 'fontNaruto';
-    src: url(/fonts/njnaruto.eot);
+    src: url(https://oussman25.github.io/naruto/fonts/njnaruto.eot);
 }
 
 body{
-    cursor: url('/img-naruto/kunai.png'), auto;
+    cursor: url('./naruto/img-naruto/kunai.png'), auto;
     width: 100vw;
     height: 100vh;
     font-family: 'fontNaruto';
