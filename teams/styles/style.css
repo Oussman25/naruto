@@ -5,12 +5,12 @@
 
 @font-face {
     font-family: 'fontNaruto';
-    src: url(/fonts/njnaruto.ttf);
+    src: url(../fonts/njnaruto.ttf);
 }
 
 @font-face {
     font-family: 'fontNaruto';
-    src: url(/fonts/njnaruto.eot);
+    src: url(../fonts/njnaruto.eot);
 }
 
 body{
